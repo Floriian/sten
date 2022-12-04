@@ -1,0 +1,83 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum FuelType {
+  DIESEL
+  PETROL
+  ELECTRIC
+  HYBRID
+}
+
+model Animal {
+  id Int @id @default(autoincrement())
+
+  name   String
+  specie String
+  age    Int
+
+  @@map("animals")
+}
+
+model City {
+  id Int @id @default(autoincrement())
+
+  name   String @unique
+  county String
+
+  weather Weather[]
+  person  Person[]
+
+  @@map("cities")
+}
+
+model Weather {
+  id Int @id @default(autoincrement())
+
+  temp     Float
+  humidity Float
+  city     City[]
+
+  @@map("weathers")
+}
+
+model Car {
+  id Int @id @default(autoincrement())
+
+  manufacturer String
+  model        String
+  year         Int
+  age          Int
+
+  licensePlate String @unique
+
+  fuel FuelType
+
+  person Person[]
+
+  @@map("cars")
+}
+
+model Person {
+  id Int @id @default(autoincrement())
+
+  name String
+  age  Int
+  sex  Boolean @default(false) //Male
+
+  cars  Car? @relation(fields: [carId], references: [id])
+  carId Int?
+
+  city   City? @relation(fields: [cityId], references: [id])
+  cityId Int?
+
+  @@map("persons")
+}

@@ -1,26 +1,85 @@
-import { Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { City } from '@prisma/client';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreateCityDto } from './dto/create-city.dto';
 import { UpdateCityDto } from './dto/update-city.dto';
 
 @Injectable()
 export class CityService {
-  create(createCityDto: CreateCityDto) {
-    return 'This action adds a new city';
+  constructor(private prisma: PrismaService) {}
+  async create(createCityDto: CreateCityDto): Promise<City> {
+    try {
+      const createCity = await this.prisma.city.create({
+        data: {
+          county: createCityDto.county,
+          name: createCityDto.name,
+        },
+      });
+      return createCity;
+    } catch (e) {
+      if (e instanceof PrismaClientKnownRequestError) {
+        if (e.code === 'P2022') {
+          throw new ConflictException('This city name is already taken.');
+        }
+      }
+      throw e;
+    }
   }
 
-  findAll() {
-    return `This action returns all city`;
+  async findAll(): Promise<City[]> {
+    const cities = await this.prisma.city.findMany();
+    if (!cities.length) throw new NotFoundException();
+    return cities;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} city`;
+  async findOne(name: string): Promise<City> {
+    const city = await this.prisma.city.findUnique({
+      where: {
+        name,
+      },
+    });
+    if (!city) throw new NotFoundException();
+    return city;
   }
 
-  update(id: number, updateCityDto: UpdateCityDto) {
-    return `This action updates a #${id} city`;
+  async findById(id: number): Promise<City> {
+    const city = await this.prisma.city.findUnique({
+      where: {
+        id,
+      },
+    });
+    if (!city) throw new NotFoundException();
+    return city;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} city`;
+  async update(id: number, updateCityDto: UpdateCityDto): Promise<City> {
+    const findCity = await this.findById(id);
+    if (!findCity) throw new NotFoundException();
+    const updateCity = await this.prisma.city.update({
+      where: {
+        id,
+      },
+      data: {
+        county: updateCityDto.county,
+        name: updateCityDto.name,
+      },
+    });
+    return updateCity;
+  }
+
+  async remove(name: string): Promise<City> {
+    const findCity = await this.findOne(name);
+    if (!findCity) throw new NotFoundException();
+    const deleteCity = await this.prisma.city.delete({
+      where: {
+        name,
+      },
+    });
+    return deleteCity;
   }
 }

@@ -3,6 +3,7 @@ import {
   Get,
   Post,
   Body,
+  Query,
   Patch,
   Param,
   Delete,
@@ -18,6 +19,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { CityService } from './city.service';
+import { CityQueryDto } from './dto/city-query.dto';
 import { CreateCityDto } from './dto/create-city.dto';
 import { UpdateCityDto } from './dto/update-city.dto';
 import { CityEntity } from './entities/city.entity';
@@ -73,8 +75,8 @@ export class CityController {
     description: 'No city found.',
     status: HttpStatus.NOT_FOUND,
   })
-  findOne(@Param('name') name: string) {
-    return this.cityService.findOne(name);
+  findOne(@Param('name') name: string, @Query() query: CityQueryDto) {
+    return this.cityService.findOne(name, query);
   }
 
   @Patch(':id')

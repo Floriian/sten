@@ -2,7 +2,7 @@ import { Controller, Get, HttpCode, HttpStatus, Param } from '@nestjs/common';
 import { ApiNotFoundResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { WeatherService } from './weather.service';
 
-@ApiTags('weather')
+@ApiTags('Weather')
 @Controller('weather')
 export class WeatherController {
   constructor(private readonly weatherService: WeatherService) {}

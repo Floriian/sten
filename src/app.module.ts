@@ -4,6 +4,7 @@ import { PrismaModule } from './prisma/prisma.module';
 import { AnimalsModule } from './animals/animals.module';
 import { CityModule } from './city/city.module';
 import { CarModule } from './car/car.module';
+import { WeatherModule } from './weather/weather.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { CarModule } from './car/car.module';
     AnimalsModule,
     CityModule,
     CarModule,
+    WeatherModule,
   ],
 })
 export class AppModule {}

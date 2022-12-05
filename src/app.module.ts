@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config/dist';
 import { PrismaModule } from './prisma/prisma.module';
 import { AnimalsModule } from './animals/animals.module';
 import { CityModule } from './city/city.module';
+import { CarModule } from './car/car.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { CityModule } from './city/city.module';
     PrismaModule,
     AnimalsModule,
     CityModule,
+    CarModule,
   ],
 })
 export class AppModule {}

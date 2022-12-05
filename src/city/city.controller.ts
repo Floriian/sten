@@ -8,7 +8,6 @@ import {
   Delete,
   HttpStatus,
   HttpCode,
-  ConflictException,
 } from '@nestjs/common';
 import {
   ApiAcceptedResponse,

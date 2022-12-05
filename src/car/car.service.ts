@@ -1,26 +1,92 @@
-import { Injectable } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { Car } from '@prisma/client';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreateCarDto } from './dto/create-car.dto';
 import { UpdateCarDto } from './dto/update-car.dto';
 
 @Injectable()
 export class CarService {
-  create(createCarDto: CreateCarDto) {
-    return 'This action adds a new car';
+  constructor(private prisma: PrismaService) {}
+
+  async create(createCarDto: CreateCarDto): Promise<Car> {
+    try {
+      const createCar = await this.prisma.car.create({
+        data: {
+          age: new Date().getFullYear() - createCarDto.year,
+          fuel: createCarDto.fuelType,
+          licensePlate: createCarDto.licensePlate,
+          manufacturer: createCarDto.manufacturer,
+          model: createCarDto.model,
+          year: createCarDto.year,
+        },
+      });
+      return createCar;
+    } catch (e) {
+      if (e instanceof PrismaClientKnownRequestError) {
+        if (e.code === 'P2002') {
+          throw new ConflictException();
+        }
+      }
+      throw e;
+    }
   }
 
-  findAll() {
-    return `This action returns all car`;
+  async findAll(): Promise<Car[]> {
+    const cars = await this.prisma.car.findMany({});
+    if (!cars.length) throw new NotFoundException();
+    return cars;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} car`;
+  async findOne(licensePlate: string): Promise<Car> {
+    const car = await this.prisma.car.findUnique({
+      where: {
+        licensePlate,
+      },
+    });
+    if (!car) throw new NotFoundException();
+    return car;
   }
 
-  update(id: number, updateCarDto: UpdateCarDto) {
-    return `This action updates a #${id} car`;
+  async findById(id: number): Promise<Car> {
+    const car = await this.prisma.car.findUnique({
+      where: {
+        id,
+      },
+    });
+    return car;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} car`;
+  async update(licensePlate: string, updateCarDto: UpdateCarDto): Promise<Car> {
+    const getCar = await this.findOne(licensePlate);
+    if (!getCar) throw new NotFoundException();
+    const updateCar = await this.prisma.car.update({
+      where: {
+        licensePlate: licensePlate,
+      },
+      data: {
+        age: new Date().getFullYear() - updateCarDto.year,
+        fuel: updateCarDto.fuelType,
+        manufacturer: updateCarDto.manufacturer,
+        model: updateCarDto.model,
+        year: updateCarDto.year,
+      },
+    });
+    return updateCar;
+  }
+
+  async remove(id: number): Promise<Car> {
+    const getCar = await this.findById(id);
+    if (!getCar) throw new NotFoundException();
+    const remove = await this.prisma.car.delete({
+      where: {
+        id,
+      },
+    });
+    return remove;
   }
 }

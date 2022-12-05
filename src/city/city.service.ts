@@ -6,12 +6,14 @@ import {
 import { City } from '@prisma/client';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 import { PrismaService } from '../prisma/prisma.service';
+import { CityQueryDto } from './dto/city-query.dto';
 import { CreateCityDto } from './dto/create-city.dto';
 import { UpdateCityDto } from './dto/update-city.dto';
 
 @Injectable()
 export class CityService {
   constructor(private prisma: PrismaService) {}
+
   async create(createCityDto: CreateCityDto): Promise<City> {
     try {
       const createCity = await this.prisma.city.create({
@@ -37,10 +39,13 @@ export class CityService {
     return cities;
   }
 
-  async findOne(name: string): Promise<City> {
+  async findOne(name: string, query?: CityQueryDto): Promise<City> {
     const city = await this.prisma.city.findUnique({
       where: {
         name,
+      },
+      include: {
+        weather: query.includeWeather ? true : false,
       },
     });
     if (!city) throw new NotFoundException();

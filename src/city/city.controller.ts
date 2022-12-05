@@ -16,6 +16,7 @@ import {
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
+  ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
 import { CityService } from './city.service';
@@ -64,6 +65,9 @@ export class CityController {
 
   @Get(':name')
   @HttpCode(HttpStatus.OK)
+  @ApiQuery({
+    name: 'includeWeather',
+  })
   @ApiOkResponse({
     isArray: false,
     description: 'It returns a city.',

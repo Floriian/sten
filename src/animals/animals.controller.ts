@@ -20,8 +20,8 @@ import { AnimalsService } from './animals.service';
 import { CreateAnimalDto } from './dto/create-animal.dto';
 import { UpdateAnimalDto } from './dto/update-animal.dto';
 import { AnimalEntity } from './entities/animal.entity';
-@ApiTags('Animals')
-@Controller('animals')
+@ApiTags('Animal')
+@Controller('animal')
 export class AnimalsController {
   constructor(private readonly animalsService: AnimalsService) {}
 

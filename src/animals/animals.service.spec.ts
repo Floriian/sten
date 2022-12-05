@@ -1,4 +1,3 @@
-import { ConfigService } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Animal } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';

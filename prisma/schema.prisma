@@ -44,7 +44,9 @@ model Weather {
 
   temp     Float
   humidity Float
-  city     City[]
+
+  city   City @relation(fields: [cityId], references: [id])
+  cityId Int
 
   @@map("weathers")
 }

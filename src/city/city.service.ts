@@ -23,7 +23,7 @@ export class CityService {
       return createCity;
     } catch (e) {
       if (e instanceof PrismaClientKnownRequestError) {
-        if (e.code === 'P2022') {
+        if (e.code === 'P2002') {
           throw new ConflictException('This city name is already taken.');
         }
       }

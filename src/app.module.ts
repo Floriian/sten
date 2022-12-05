@@ -6,6 +6,7 @@ import { CityModule } from './city/city.module';
 import { CarModule } from './car/car.module';
 import { WeatherModule } from './weather/weather.module';
 import { UtilsModule } from './utils/utils.module';
+import { PersonModule } from './person/person.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { UtilsModule } from './utils/utils.module';
     CarModule,
     WeatherModule,
     UtilsModule,
+    PersonModule,
   ],
 })
 export class AppModule {}

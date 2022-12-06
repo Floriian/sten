@@ -1,13 +1,27 @@
 version: '3.8'
 
 services:
+  api:
+    container_name: sten_rest_api
+    build: .
+    ports:
+      - 3000:3000
+      - 5400:5400
+    expose:
+      - 3000
+      - 5400
+    environment:
+      - PORT=3000
+      - DATABASE_URL=postgresql://sten:supers3cr3t@sten:5434/rest?schema=public
+    depends_on:
+      - "db"
+    restart: on-failure
   db:
-    container_name: restazure
+    container_name: postgres_database
     image: postgres:15.1-alpine
     ports:
       - 5434:5432
     environment:
-      - POSTGRES_USER=api
-      - POSTGRES_PASSWORD=restapicuccos
-      - POSTGRES_DB=rest
-    
+      - POSTGRES_USER=sten
+      - POSTGRES_PASSWORD=supers3cr3t
+      - POSTGRES_DB=sten

@@ -7,14 +7,14 @@ import { UpdateAnimalDto } from './dto/update-animal.dto';
 const testAnimal = 'Radír';
 const testAnimalAge = 12;
 const testAnimalSpecie = 'Mopsz';
-const animalid = 1;
+const testAnimalId = 1;
 
 const animalArray: Animal[] = [
   {
     name: testAnimal,
     age: testAnimalAge,
     specie: testAnimalSpecie,
-    id: animalid,
+    id: testAnimalId,
   },
   {
     name: 'Bella',
@@ -86,5 +86,16 @@ describe('AnimalsService', () => {
   it('Should delete an animal', async () => {
     const deleteAnimal = await service.remove(0);
     expect(deleteAnimal).toEqual(oneAnimal);
+  });
+
+  it('Should create an animal', async () => {
+    const createAnimal: Animal = {
+      age: testAnimalAge,
+      name: testAnimal,
+      specie: testAnimalSpecie,
+      id: testAnimalId,
+    };
+    const create = await service.create(createAnimal);
+    expect(create).toEqual(createAnimal);
   });
 });

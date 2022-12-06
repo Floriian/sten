@@ -12,7 +12,7 @@ services:
       - 5400
     environment:
       - PORT=3000
-      - DATABASE_URL=postgresql://sten:supers3cr3t@sten:5432/rest?schema=public
+      - DATABASE_URL=postgresql://sten:supers3cr3t@sten:5434/rest?schema=public
     depends_on:
       - "db"
     restart: on-failure

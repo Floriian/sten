@@ -1,4 +1,4 @@
-# <p style="text-align: center;">STEN</p>
+# <p align="center">STEN</p>
 
 ## Basic concept
 

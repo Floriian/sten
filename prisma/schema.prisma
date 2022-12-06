@@ -71,7 +71,7 @@ model Car {
 model Person {
   id Int @id @default(autoincrement())
 
-  name String
+  name String  @unique
   age  Int
   sex  Boolean @default(false) //Male
 

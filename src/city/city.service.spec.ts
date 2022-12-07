@@ -1,13 +1,36 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { City } from '@prisma/client';
+import { City, Weather } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { ConvertService } from '../utils/convert.service';
 import { CityService } from './city.service';
 import { CreateCityDto } from './dto/create-city.dto';
+
+type CustomCity<T> = City & {
+  weather: T;
+};
 
 const testCity: City = {
   id: 0,
   name: 'Szeged',
   county: 'Csongrád-Csanád',
+};
+
+const testCityWithWeather: CustomCity<Weather[]> = {
+  ...testCity,
+  weather: [
+    {
+      cityId: testCity.id,
+      id: 0,
+      humidity: 82.2,
+      temp: 22,
+    },
+    {
+      cityId: testCity.id,
+      id: 1,
+      humidity: 82.1,
+      temp: 23,
+    },
+  ],
 };
 
 const testCityArray: City[] = [
@@ -36,11 +59,17 @@ const db = {
   },
 };
 
+const utils = {
+  convert: {
+    toBoolean: jest.fn(),
+  },
+};
 //Todo
 
 describe('CityService', () => {
   let service: CityService;
   let prisma: PrismaService;
+  let convertService: ConvertService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -49,6 +78,10 @@ describe('CityService', () => {
         {
           provide: PrismaService,
           useValue: db,
+        },
+        {
+          provide: ConvertService,
+          useValue: utils,
         },
       ],
     }).compile();
@@ -73,5 +106,11 @@ describe('CityService', () => {
   it('Should return all cities', async () => {
     const cities = await service.findAll();
     expect(cities).toEqual(testCityArray);
+  });
+
+  it('Should return one city', async () => {
+    expect(
+      service.findOne('Szeged', { includeWeather: false }),
+    ).resolves.toEqual(testCity);
   });
 });

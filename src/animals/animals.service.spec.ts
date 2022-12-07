@@ -31,7 +31,6 @@ const animalArray: Animal[] = [
 ];
 
 const oneAnimal = animalArray[0];
-
 const db = {
   animal: {
     findMany: jest.fn().mockResolvedValue(animalArray),

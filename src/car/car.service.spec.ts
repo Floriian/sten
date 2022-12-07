@@ -92,7 +92,7 @@ describe('CarService', () => {
     expect(car).toEqual(testCar);
   });
 
-  it('Should delete an animal', async () => {
+  it('Should delete an car', async () => {
     const deleteCar = await service.remove(testCar.id);
     expect(deleteCar).toEqual(testCar);
   });

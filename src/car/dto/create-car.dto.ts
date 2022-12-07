@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { FuelType } from '@prisma/client';
-import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import { IsEnum, IsInt, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateCarDto {
   @ApiProperty()
@@ -14,7 +14,7 @@ export class CreateCarDto {
   model: string;
 
   @ApiProperty()
-  @IsString()
+  @IsInt()
   @IsNotEmpty()
   year: number;
 

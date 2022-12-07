@@ -42,7 +42,6 @@ const db = {
   car: {
     findMany: jest.fn().mockResolvedValue(testCarArray),
     findUnique: jest.fn().mockResolvedValue(oneCar),
-    findById: jest.fn().mockResolvedValue(oneCar),
     create: jest.fn().mockResolvedValue(oneCar),
     delete: jest.fn().mockResolvedValue(oneCar),
     update: jest.fn().mockResolvedValue(oneCar),

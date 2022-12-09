@@ -18,12 +18,12 @@ import {
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
+  ApiTags,
 } from '@nestjs/swagger';
 import { PersonEntity } from './entities/person.entity';
 import { PersonQueryDto } from './dto/person-query.dto';
 
-//TODO queryparams
-
+@ApiTags('Person')
 @Controller('person')
 export class PersonController {
   constructor(private readonly personService: PersonService) {}

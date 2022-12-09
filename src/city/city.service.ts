@@ -39,7 +39,7 @@ export class CityService {
     return cities;
   }
 
-  async findOne(name: string, query?: CityQueryDto): Promise<City> {
+  async findOne(name: string, query: CityQueryDto): Promise<City> {
     const city = await this.prisma.city.findUnique({
       where: {
         name,
@@ -78,7 +78,7 @@ export class CityService {
   }
 
   async remove(name: string): Promise<City> {
-    const findCity = await this.findOne(name);
+    const findCity = await this.findOne(name, { includeWeather: false });
     if (!findCity) throw new NotFoundException();
     const deleteCity = await this.prisma.city.delete({
       where: {

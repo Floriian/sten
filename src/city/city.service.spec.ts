@@ -53,7 +53,10 @@ const db = {
   city: {
     create: jest.fn().mockResolvedValue(oneCity),
     findMany: jest.fn().mockResolvedValue(testCityArray),
-    findUnique: jest.fn().mockResolvedValue(oneCity),
+    findUnique: jest
+      .fn()
+      .mockResolvedValueOnce(oneCity)
+      .mockResolvedValueOnce(testCityWithWeather),
     update: jest.fn().mockResolvedValue(oneCity),
     remove: jest.fn().mockResolvedValue(oneCity),
   },
@@ -112,5 +115,12 @@ describe('CityService', () => {
     expect(
       service.findOne('Szeged', { includeWeather: false }),
     ).resolves.toEqual(testCity);
+  });
+
+  it('Should return city, with weather', async () => {
+    const city = await service.findOne('Szeged', {
+      includeWeather: true,
+    });
+    expect(city).toBe(testCityWithWeather);
   });
 });

@@ -45,7 +45,7 @@ model Weather {
   temp     Float
   humidity Float
 
-  city   City @relation(fields: [cityId], references: [id])
+  city   City @relation(fields: [cityId], references: [id], onDelete: Cascade)
   cityId Int
 
   @@map("weathers")

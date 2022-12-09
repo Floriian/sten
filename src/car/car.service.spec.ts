@@ -42,7 +42,6 @@ const db = {
   car: {
     findMany: jest.fn().mockResolvedValue(testCarArray),
     findUnique: jest.fn().mockResolvedValue(oneCar),
-    findById: jest.fn().mockResolvedValue(oneCar),
     create: jest.fn().mockResolvedValue(oneCar),
     delete: jest.fn().mockResolvedValue(oneCar),
     update: jest.fn().mockResolvedValue(oneCar),
@@ -92,7 +91,7 @@ describe('CarService', () => {
     expect(car).toEqual(testCar);
   });
 
-  it('Should delete an animal', async () => {
+  it('Should delete an car', async () => {
     const deleteCar = await service.remove(testCar.id);
     expect(deleteCar).toEqual(testCar);
   });

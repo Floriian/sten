@@ -1,3 +1,4 @@
+import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import { Animal } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
@@ -31,7 +32,6 @@ const animalArray: Animal[] = [
 ];
 
 const oneAnimal = animalArray[0];
-
 const db = {
   animal: {
     findMany: jest.fn().mockResolvedValue(animalArray),

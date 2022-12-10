@@ -11,4 +11,9 @@ export class PersonQueryDto {
   @IsNotEmpty()
   @IsBoolean()
   includeCity: boolean;
+
+  @Transform(({ value }) => (value.toLowerCase() === 'true' ? true : false))
+  @IsNotEmpty()
+  @IsBoolean()
+  includeTodos: boolean;
 }

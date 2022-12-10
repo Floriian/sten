@@ -47,6 +47,7 @@ export class PersonService {
       include: {
         cars: query.includeCar,
         city: query.includeCity,
+        todo: query.includeTodos,
       },
     });
     if (!person) throw new NotFoundException();
@@ -80,6 +81,11 @@ export class PersonService {
         city: {
           connect: {
             id: updatePersonDto.cityId,
+          },
+        },
+        todo: {
+          connect: {
+            id: updatePersonDto.todoId,
           },
         },
         name: updatePersonDto.name,

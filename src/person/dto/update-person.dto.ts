@@ -12,4 +12,9 @@ export class UpdatePersonDto extends PartialType(CreatePersonDto) {
   @IsOptional()
   @IsInt()
   cityId: number;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsInt()
+  todoId: number;
 }

@@ -39,7 +39,7 @@ describe('Animals E2E', () => {
   });
 
   describe('/  (No Data)', () => {
-    it('/ GET', () => {
+    it('/ GET NotFoundException', () => {
       return pactum.spec().get('/').expectStatus(HttpStatus.NOT_FOUND);
     });
     it('/id GET NotFoundException', () => {

@@ -18,6 +18,7 @@ import {
 } from '@nestjs/swagger';
 import { AnimalsService } from './animals.service';
 import { CreateAnimalDto } from './dto/create-animal.dto';
+import { ParamValiation } from './dto/paramvalidation.dto';
 import { UpdateAnimalDto } from './dto/update-animal.dto';
 import { AnimalEntity } from './entities/animal.entity';
 @ApiTags('Animal')
@@ -67,8 +68,8 @@ export class AnimalsController {
     status: HttpStatus.NOT_FOUND,
     description: 'No animal found',
   })
-  findOne(@Param('id') id: string) {
-    return this.animalsService.findOne(+id);
+  findOne(@Param() animalParam: ParamValiation) {
+    return this.animalsService.findOne(+animalParam.id);
   }
 
   @Patch(':id')
@@ -84,8 +85,11 @@ export class AnimalsController {
     status: HttpStatus.NOT_FOUND,
     description: 'No animal found',
   })
-  update(@Param('id') id: string, @Body() updateAnimalDto: UpdateAnimalDto) {
-    return this.animalsService.update(+id, updateAnimalDto);
+  update(
+    @Param() animalParam: ParamValiation,
+    @Body() updateAnimalDto: UpdateAnimalDto,
+  ) {
+    return this.animalsService.update(+animalParam.id, updateAnimalDto);
   }
 
   @Delete(':id')
@@ -101,7 +105,7 @@ export class AnimalsController {
     status: HttpStatus.NOT_FOUND,
     description: 'No animal found',
   })
-  remove(@Param('id') id: string) {
-    return this.animalsService.remove(+id);
+  remove(@Param() animalParam: ParamValiation) {
+    return this.animalsService.remove(+animalParam.id);
   }
 }

@@ -8,6 +8,7 @@ import {
   Delete,
   HttpCode,
   HttpStatus,
+  Query,
 } from '@nestjs/common';
 import { PersonService } from './person.service';
 import { CreatePersonDto } from './dto/create-person.dto';
@@ -17,9 +18,12 @@ import {
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
+  ApiTags,
 } from '@nestjs/swagger';
 import { PersonEntity } from './entities/person.entity';
+import { PersonQueryDto } from './dto/person-query.dto';
 
+@ApiTags('Person')
 @Controller('person')
 export class PersonController {
   constructor(private readonly personService: PersonService) {}
@@ -71,8 +75,8 @@ export class PersonController {
     description: 'It returns a NotFoundException',
     status: HttpStatus.NOT_FOUND,
   })
-  findOne(@Param('name') name: string) {
-    return this.personService.findOne(name);
+  findOne(@Param('name') name: string, @Query() query: PersonQueryDto) {
+    return this.personService.findOne(name, query);
   }
 
   @Patch(':id')

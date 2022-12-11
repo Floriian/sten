@@ -19,4 +19,7 @@ export class PersonEntity implements Person {
 
   @ApiProperty()
   cityId: number;
+
+  @ApiProperty()
+  todoId: number;
 }

@@ -7,6 +7,7 @@ import { Person } from '@prisma/client';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreatePersonDto } from './dto/create-person.dto';
+import { PersonQueryDto } from './dto/person-query.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
 
 @Injectable()
@@ -38,10 +39,15 @@ export class PersonService {
     return persons;
   }
 
-  async findOne(name: string): Promise<Person> {
+  async findOne(name: string, query: PersonQueryDto): Promise<Person> {
     const person = await this.prisma.person.findUnique({
       where: {
         name: name,
+      },
+      include: {
+        cars: query.includeCar,
+        city: query.includeCity,
+        todo: query.includeTodos,
       },
     });
     if (!person) throw new NotFoundException();
@@ -75,6 +81,11 @@ export class PersonService {
         city: {
           connect: {
             id: updatePersonDto.cityId,
+          },
+        },
+        todo: {
+          connect: {
+            id: updatePersonDto.todoId,
           },
         },
         name: updatePersonDto.name,

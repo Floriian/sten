@@ -68,6 +68,19 @@ model Car {
   @@map("cars")
 }
 
+model Todo {
+  id Int @id @default(autoincrement())
+
+  title     String
+  body      String
+  completed Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  person Person[]
+}
+
 model Person {
   id Int @id @default(autoincrement())
 
@@ -80,6 +93,9 @@ model Person {
 
   city   City? @relation(fields: [cityId], references: [id])
   cityId Int?
+
+  todo   Todo? @relation(fields: [todoId], references: [id])
+  todoId Int?
 
   @@map("persons")
 }

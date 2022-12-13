@@ -17,6 +17,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { CarService } from './car.service';
+import { CarParamValiation } from './dto/carparamvalidation.dto';
 import { CreateCarDto } from './dto/create-car.dto';
 import { UpdateCarDto } from './dto/update-car.dto';
 import { CarEntity } from './entities/car.entity';
@@ -27,11 +28,11 @@ export class CarController {
   constructor(private readonly carService: CarService) {}
 
   @Post()
-  @HttpCode(HttpStatus.ACCEPTED)
+  @HttpCode(HttpStatus.CREATED)
   @ApiAcceptedResponse({
     isArray: false,
     description: 'It creates an car.',
-    status: HttpStatus.ACCEPTED,
+    status: HttpStatus.CREATED,
     type: CarEntity,
   })
   @ApiConflictResponse({
@@ -73,17 +74,17 @@ export class CarController {
     description: 'It returns a NotFoundException',
     status: HttpStatus.NOT_FOUND,
   })
-  findOne(@Param('licensePlate') licensePlate: string) {
-    return this.carService.findOne(licensePlate);
+  findOne(@Param() carParams: CarParamValiation) {
+    return this.carService.findOne(carParams.licensePlate);
   }
 
   @Patch(':licensePlate')
   @HttpCode(HttpStatus.ACCEPTED)
   update(
-    @Param('licensePlate') licensePlate: string,
+    @Param() carParams: CarParamValiation,
     @Body() updateCarDto: UpdateCarDto,
   ) {
-    return this.carService.update(licensePlate, updateCarDto);
+    return this.carService.update(carParams.licensePlate, updateCarDto);
   }
 
   @Delete(':id')
@@ -100,7 +101,7 @@ export class CarController {
     description: 'It returns a NotFoundException',
     status: HttpStatus.NOT_FOUND,
   })
-  remove(@Param('id') id: string) {
-    return this.carService.remove(+id);
+  remove(@Param() carParams: CarParamValiation) {
+    return this.carService.remove(+carParams.id);
   }
 }

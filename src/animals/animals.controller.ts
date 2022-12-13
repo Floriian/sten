@@ -18,7 +18,7 @@ import {
 } from '@nestjs/swagger';
 import { AnimalsService } from './animals.service';
 import { CreateAnimalDto } from './dto/create-animal.dto';
-import { ParamValiation } from './dto/paramvalidation.dto';
+import { AnimalParamValidation } from './dto/paramvalidation.dto';
 import { UpdateAnimalDto } from './dto/update-animal.dto';
 import { AnimalEntity } from './entities/animal.entity';
 @ApiTags('Animal')
@@ -68,7 +68,7 @@ export class AnimalsController {
     status: HttpStatus.NOT_FOUND,
     description: 'No animal found',
   })
-  findOne(@Param() animalParam: ParamValiation) {
+  findOne(@Param() animalParam: AnimalParamValidation) {
     return this.animalsService.findOne(+animalParam.id);
   }
 
@@ -86,7 +86,7 @@ export class AnimalsController {
     description: 'No animal found',
   })
   update(
-    @Param() animalParam: ParamValiation,
+    @Param() animalParam: AnimalParamValidation,
     @Body() updateAnimalDto: UpdateAnimalDto,
   ) {
     return this.animalsService.update(+animalParam.id, updateAnimalDto);
@@ -105,7 +105,7 @@ export class AnimalsController {
     status: HttpStatus.NOT_FOUND,
     description: 'No animal found',
   })
-  remove(@Param() animalParam: ParamValiation) {
+  remove(@Param() animalParam: AnimalParamValidation) {
     return this.animalsService.remove(+animalParam.id);
   }
 }

@@ -19,9 +19,10 @@ export class CarService {
 
   async create(createCarDto: CreateCarDto): Promise<Car> {
     try {
+      const age = await this.calculate.calculateAge(createCarDto.year);
       const createCar = await this.prisma.car.create({
         data: {
-          age: new Date().getFullYear() - createCarDto.year,
+          age: age,
           fuel: createCarDto.fuelType,
           licensePlate: createCarDto.licensePlate,
           manufacturer: createCarDto.manufacturer,

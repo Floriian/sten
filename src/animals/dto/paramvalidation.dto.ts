@@ -1,7 +1,9 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { IsNumberString } from 'class-validator';
 
 //Use all this, because animal params based on id.
 export class AnimalParamValidation {
   @IsNumberString()
-  id: number;
+  @ApiProperty({ name: 'AnimalID' })
+  id: string;
 }

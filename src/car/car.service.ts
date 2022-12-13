@@ -6,12 +6,16 @@ import {
 import { Car } from '@prisma/client';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 import { PrismaService } from '../prisma/prisma.service';
+import { CalculateService } from '../utils/calc.service';
 import { CreateCarDto } from './dto/create-car.dto';
 import { UpdateCarDto } from './dto/update-car.dto';
 
 @Injectable()
 export class CarService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private calculate: CalculateService,
+  ) {}
 
   async create(createCarDto: CreateCarDto): Promise<Car> {
     try {
@@ -64,12 +68,13 @@ export class CarService {
   async update(licensePlate: string, updateCarDto: UpdateCarDto): Promise<Car> {
     const getCar = await this.findOne(licensePlate);
     if (!getCar) throw new NotFoundException();
+    const calculatedAge = await this.calculate.calculateAge(updateCarDto.year);
     const updateCar = await this.prisma.car.update({
       where: {
         licensePlate: licensePlate,
       },
       data: {
-        age: new Date().getFullYear() - updateCarDto.year,
+        age: calculatedAge,
         fuel: updateCarDto.fuelType,
         manufacturer: updateCarDto.manufacturer,
         model: updateCarDto.model,

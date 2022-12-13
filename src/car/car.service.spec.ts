@@ -79,7 +79,7 @@ describe('CarService', () => {
     expect(service.findOne(testCar.licensePlate)).resolves.toEqual(oneCar);
   });
 
-  it('Should update an car', async () => {
+  it('Should update a car', async () => {
     const carDto: UpdateCarDto = {
       fuelType: testCar.fuel,
       licensePlate: testCar.licensePlate,
@@ -91,7 +91,7 @@ describe('CarService', () => {
     expect(car).toEqual(testCar);
   });
 
-  it('Should delete an car', async () => {
+  it('Should delete a car', async () => {
     const deleteCar = await service.remove(testCar.id);
     expect(deleteCar).toEqual(testCar);
   });

@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Car } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { CalculateService } from '../utils/calc.service';
 import { CarService } from './car.service';
 import { UpdateCarDto } from './dto/update-car.dto';
 
@@ -51,6 +52,7 @@ const db = {
 describe('CarService', () => {
   let service: CarService;
   let prisma: PrismaService;
+  let calculate: CalculateService;
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -59,6 +61,7 @@ describe('CarService', () => {
           provide: PrismaService,
           useValue: db,
         },
+        CalculateService,
       ],
     }).compile();
 

@@ -63,8 +63,8 @@ export class CityService {
   }
 
   async update(id: number, updateCityDto: UpdateCityDto): Promise<City> {
-    const findCity = await this.findById(id);
-    if (!findCity) throw new NotFoundException();
+    await this.findById(id);
+
     const updateCity = await this.prisma.city.update({
       where: {
         id,
@@ -78,8 +78,7 @@ export class CityService {
   }
 
   async remove(name: string): Promise<City> {
-    const findCity = await this.findOne(name, { includeWeather: false });
-    if (!findCity) throw new NotFoundException();
+    await this.findOne(name, { includeWeather: false });
     const deleteCity = await this.prisma.city.delete({
       where: {
         name,

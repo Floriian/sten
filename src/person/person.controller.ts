@@ -18,6 +18,8 @@ import {
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
+  ApiParam,
+  ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
 import { PersonEntity } from './entities/person.entity';
@@ -63,6 +65,29 @@ export class PersonController {
   }
 
   @Get(':name')
+  @ApiParam({
+    name: 'name',
+    description: "Person's name.",
+    required: true,
+  })
+  @ApiQuery({
+    name: 'includeCity',
+    description: "Include person's city?",
+    type: Boolean,
+    required: false,
+  })
+  @ApiQuery({
+    name: 'includeCar',
+    description: "Include person's cars?",
+    type: Boolean,
+    required: false,
+  })
+  @ApiQuery({
+    name: 'includeTodos',
+    description: "Include person's todos?",
+    type: Boolean,
+    required: false,
+  })
   @HttpCode(HttpStatus.OK)
   @ApiOkResponse({
     isArray: false,

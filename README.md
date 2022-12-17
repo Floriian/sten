@@ -5,14 +5,14 @@
 The app name is anagram of Nest.
 The basic concept is create a free API for learning purposes. In my school we learn Python, and this created specially for my school. But I think, it's very useful for other schools for teaching how RESTAPI-s works, or everyone else :) It uses <a href="https://nestjs.com">NestJS</a> under the hood. Supports basic HTTP methods (GET, POST, PATCH, DELETE). I will add Put method in the future.
 
-## How can I install locally?
+# How can I install locally?
 
 1. [With Docker-Compose](#docker)
 2. [Without Docker-Compose](#without-docker)
 
-### <a name="docker"></a>With Docker-Compose
+## <a name="docker"></a>With Docker-Compose
 
-#### You will need:
+You will need:
 
 - <a href="https://www.docker.com">Docker</a>
 - Terminal (zsh, bash, powershell)
@@ -33,9 +33,9 @@ The basic concept is create a free API for learning purposes. In my school we le
 5. Swagger: open browser, and type (with default port):
    <a>http://localhost:3000</a>
 
-### <a name="without-docker"></a>Without Docker-Compose
+## <a name="without-docker"></a>Without Docker-Compose
 
-#### You will need:
+You will need:
 
 - <a href="https://www.visualcrossing.com/">A Weather API key</a>
 - Shell
@@ -74,7 +74,7 @@ npm run start:prod
 
 9. The port is in the console, where is the app listening.
 
-## Endpoints
+# Endpoints
 
 - [/animal](#animals)
 
@@ -89,9 +89,9 @@ npm run start:prod
   - [PATCH](#cars.patch)
   - [DELETE](#cars.delete)
 
-### <a name="animals"></a>Animals
+## <a name="animals"></a>Animals
 
-##### <a name="animals.get"></a>GET
+### <a name="animals.get"></a>GET
 
 ```http
 GET /animal
@@ -103,7 +103,7 @@ It returns all animals in the db.<br/>
 | Params | Optional (see below) |
 | Request body | None |
 
-##### Example responses:
+Example responses
 
 - Response (Code 200):
   ```json
@@ -132,13 +132,13 @@ GET /animal/:id
 
 It returns one animal, with a given ID. <br/>
 
-##### Example:
+Examples:
 
 ```http
 GET /animal/1
 ```
 
-Example responses:
+Example responses
 
 - Response (Code 200):
 
@@ -158,7 +158,7 @@ Example responses:
   <!-- TODO -->
   <br/>
 
-##### <a name="animals.post"></a>POST
+### <a name="animals.post"></a>POST
 
 ```http
 POST /animal
@@ -176,7 +176,7 @@ Request body options:
 | specie | string | ✅ |
 | age | int | ✅ |
 
-##### Example request:
+Example request:
 
 ```http
 POST /animal
@@ -189,7 +189,7 @@ Content-Type: application/json
 }
 ```
 
-##### Example responses:
+Example responses
 
 - Response (Code 201):<br>
   The animal has been created, and returns the created animal data.
@@ -204,7 +204,7 @@ Content-Type: application/json
 - Response (Code 400) <br>
   This response happens, when the body is failed the validation test.
 
-##### <a name="animals.patch"></a>PATCH
+### <a name="animals.patch"></a>PATCH
 
 ```http
 PATCH /animal/:id
@@ -224,7 +224,7 @@ Request body options:
 | specie | string | ❌ |
 | age | int | ❌ |
 
-##### Example request:
+Example request:
 
 ```http
 PATCH /animal/1
@@ -235,7 +235,7 @@ Content-Type: application/json
 }
 ```
 
-##### Example responses:
+Example responses
 
 - Response (Code 202)
 
@@ -250,7 +250,7 @@ Content-Type: application/json
 - Response (Code 404): <br>No animal found with this ID.
 - Response (Code 400): <br>This response happens, when the body is failed the validation test.
 
-##### <a name="animals.delete"></a>DELETE
+### <a name="animals.delete"></a>DELETE
 
 ```http
 DELETE /animal/:id
@@ -262,13 +262,13 @@ It deletes animal by id, and return the deleted animal's data.
 | Params | Required |
 | Request body | None |
 
-##### Example request
+Example request
 
 ```http
 DELETE /animal/1
 ```
 
-##### Example responses
+Example responses
 
 - Response (Code 200)
   ```json
@@ -283,13 +283,3 @@ DELETE /animal/1
   No animal fond with the given ID.
 - Response (Code 400) <br>
   This response happens, when the param not int, It will return a body
-
-### <a name="cars"></a>Car
-
-##### <a name="cars.get"></a>GET
-
-##### <a name="cars.post"></a>POST
-
-##### <a name="cars.patch"></a>PATCH
-
-##### <a name="cars.delete"></a>DELETE

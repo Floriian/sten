@@ -102,24 +102,24 @@ Example responses:
 - Response 200:
   ```json
   [
-     {
-        id: 0,
-        name: "The animal's name",
-        specie: "The animal's specie",
-        age: 10
-     }
-     {
-        id: 1,
-        name: "The animal's name",
-        specie: "The animal's specie",
-        age: 11
-     }
+    {
+      "id": 0,
+      "name": "The animal's name",
+      "specie": "The animal's specie",
+      "age": 10
+    },
+    {
+      "id": 1,
+      "name": "The animal's name",
+      "specie": "The animal's specie",
+      "age": 11
+    }
   ]
   ```
 - Response 404: No animals in the database.
 
 ```http
-/animal/:id
+GET /animal/:id
 ```
 
 It returns one animal, with a given ID. <br/>

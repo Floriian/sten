@@ -264,7 +264,7 @@ It deletes animal by id, and return the deleted animal's data.
 
 ##### Example request
 
-```json
+```http
 DELETE /animal/1
 ```
 

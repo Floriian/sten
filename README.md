@@ -99,7 +99,7 @@ It returns all animals in the db.<br/>
 
 Example responses:
 
-- Response 200:
+- Response (Code 200):
   ```json
   [
     {
@@ -116,7 +116,7 @@ Example responses:
     }
   ]
   ```
-- Response 404: No animals in the database.
+- Response (Code 404): No animals in the database.
 
 ```http
 GET /animal/:id
@@ -132,7 +132,7 @@ GET /animal/1
 
 Example responses:
 
-- Response 200:
+- Response (Code 200):
 
 ```json
 {
@@ -143,15 +143,63 @@ Example responses:
 }
 ```
 
-- Response 404:
+- Response (Code 404):
   No animals in the database.
-- Response 400:
+- Response (Code 400):
   This response happens, when the param not int, It will return a body
   <!-- TODO -->
   <br/>
 
 ##### <a name="animals.post"></a>POST
 
+```http
+POST /animal
+```
+
+|    Option    |  Value   |
+| :----------: | :------: |
+|    Params    |   None   |
+| Request body | Required |
+
+Request options:
+| Key | Type | Required? |
+|:------------:|:--------:|:--------:|
+| name | string | ✅ |
+| specie | string | ✅ |
+| age | int | ✅ |
+
+##### Example request:
+
+```http
+POST /animal
+Content-Type: application/json
+
+{
+   "name": "Radír",
+   "specie": "Mopsz",
+   "age": 12
+}
+```
+
+##### Example responses:
+
+- Response (Code 201):
+  The animal has been created, and returns the created animal data.
+  ```json
+  {
+    "id": 1,
+    "name": "Radír",
+    "specie": "Mopsz",
+    "age": 12
+  }
+  ```
+- Response (Code 400) <br>
+  This response happens, when the body is failed the validation test.
+
 ##### <a name="animals.patch"></a>PATCH
+
+```http
+PATCH /animal/:id
+```
 
 ##### <a name="animals.delete"></a>DELETE

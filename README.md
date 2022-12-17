@@ -74,7 +74,7 @@ npm run start:prod
 
 9. The port is in the console, where is the app listening.
 
-### Endpoints
+# Endpoints
 
 - [/animal](#animals)
   - [GET](#animals.get)
@@ -97,7 +97,7 @@ It returns all animals in the db.<br/>
 | Params | Optional (see below) |
 | Request body | None |
 
-Example responses:
+##### Example responses:
 
 - Response (Code 200):
   ```json
@@ -118,6 +118,8 @@ Example responses:
   ```
 - Response (Code 404): No animals in the database.
 
+#### Get by ID.
+
 ```http
 GET /animal/:id
 ```
@@ -134,18 +136,18 @@ Example responses:
 
 - Response (Code 200):
 
-```json
-{
-  "id": 1,
-  "name": "Lessie",
-  "specie": "Fox",
-  "age": 18
-}
-```
+  ```json
+  {
+    "id": 1,
+    "name": "Lessie",
+    "specie": "Fox",
+    "age": 18
+  }
+  ```
 
-- Response (Code 404):
-  No animals in the database.
-- Response (Code 400):
+- Response (Code 404):<br>
+  No animal found in database.
+- Response (Code 400):<br>
   This response happens, when the param not int, It will return a body
   <!-- TODO -->
   <br/>
@@ -161,7 +163,7 @@ POST /animal
 |    Params    |   None   |
 | Request body | Required |
 
-Request options:
+Request body options:
 | Key | Type | Required? |
 |:------------:|:--------:|:--------:|
 | name | string | ✅ |
@@ -183,7 +185,7 @@ Content-Type: application/json
 
 ##### Example responses:
 
-- Response (Code 201):
+- Response (Code 201):<br>
   The animal has been created, and returns the created animal data.
   ```json
   {
@@ -202,4 +204,74 @@ Content-Type: application/json
 PATCH /animal/:id
 ```
 
+It will update animal by id, and returns the animal with updated data.
+
+|    Option    |  Value   |
+| :----------: | :------: |
+|    Params    | Required |
+| Request body | Required |
+
+Request body options:
+| Key | Type | Required? |
+|:------------:|:--------:|:--------:|
+| name | string | ❌ |
+| specie | string | ❌ |
+| age | int | ❌ |
+
+##### Example request:
+
+```http
+PATCH /animal/1
+Content-Type: application/json
+
+{
+   "name": "Lessie"
+}
+```
+
+##### Example responses:
+
+- Response (Code 202)
+
+  ```json
+  {
+    "name": "Lessie",
+    "specie": "Fox",
+    "age": 10
+  }
+  ```
+
+- Response (Code 404): <br>No animal found with this ID.
+- Response (Code 400): <br>This response happens, when the body is failed the validation test.
+
 ##### <a name="animals.delete"></a>DELETE
+
+```http
+DELETE /animal/:id
+```
+
+It deletes animal by id, and return the deleted animal's data.
+| Option | Value |
+| :----------: | :------: |
+| Params | Required |
+| Request body | None |
+
+##### Example request
+
+```json
+DELETE /animal/1
+```
+
+##### Example responses
+
+- Response (Code 200)
+  ```json
+  {
+    "id": 1,
+    "name": "Radír",
+    "specie": "Mopsz",
+    "age": 10
+  }
+  ```
+- Response (Code 404) <br>
+  No animal fond with the given ID.

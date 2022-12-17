@@ -5,9 +5,12 @@
 The app name is anagram of Nest.
 The basic concept is create a free API for learning purposes. In my school we learn Python, and this created specially for my school. But I think, it's very useful for other schools for teaching how RESTAPI-s works, or everyone else :) It uses <a href="https://nestjs.com">NestJS</a> under the hood. Supports basic HTTP methods (GET, POST, PATCH, DELETE). I will add Put method in the future.
 
-## How can I use?
+## How can I install locally?
 
-You will need:
+1. [With Docker-Compose](#docker)
+2. [Without Docker-Compose](#without-docker)
+
+### <a name="docker"></a>With Docker-Compose
 
 - <a href="https://www.docker.com">Docker</a>
 - Terminal (zsh, bash, powershell)
@@ -27,3 +30,5 @@ You will need:
    <img src="https://i.imgur.com/w9rCUun.png"/>
 5. Swagger: open browser, and type (with default port):
    <a>http://localhost:3000</a>
+
+### <a name="without-docker"></a>Without Docker-Compose

@@ -74,14 +74,20 @@ npm run start:prod
 
 9. The port is in the console, where is the app listening.
 
-# Endpoints
+## Endpoints
 
 - [/animal](#animals)
+
   - [GET](#animals.get)
   - [POST](#animals.post)
   - [PATCH](#animals.patch)
   - [DELETE](#animals.delete)
-- /
+
+- [/car](#cars)
+  - [GET](#cars.get)
+  - [POST](#cars.post)
+  - [PATCH](#cars.patch)
+  - [DELETE](#cars.delete)
 
 ### <a name="animals"></a>Animals
 
@@ -275,3 +281,15 @@ DELETE /animal/1
   ```
 - Response (Code 404) <br>
   No animal fond with the given ID.
+- Response (Code 400) <br>
+  This response happens, when the param not int, It will return a body
+
+### <a name="cars"></a>Car
+
+##### <a name="cars.get"></a>GET
+
+##### <a name="cars.post"></a>POST
+
+##### <a name="cars.patch"></a>PATCH
+
+##### <a name="cars.delete"></a>DELETE

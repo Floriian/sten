@@ -1,19 +1,19 @@
 import { Transform } from 'class-transformer';
-import { IsBoolean, IsNotEmpty } from 'class-validator';
+import { IsBoolean, IsOptional } from 'class-validator';
 
 export class PersonQueryDto {
   @Transform(({ value }) => (value.toLowerCase() === 'true' ? true : false))
-  @IsNotEmpty()
+  @IsOptional()
   @IsBoolean()
   includeCar: boolean;
 
   @Transform(({ value }) => (value.toLowerCase() === 'true' ? true : false))
-  @IsNotEmpty()
+  @IsOptional()
   @IsBoolean()
   includeCity: boolean;
 
   @Transform(({ value }) => (value.toLowerCase() === 'true' ? true : false))
-  @IsNotEmpty()
+  @IsOptional()
   @IsBoolean()
   includeTodos: boolean;
 }

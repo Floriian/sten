@@ -14,6 +14,8 @@ import {
   ApiConflictResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
+  ApiParam,
+  ApiProperty,
   ApiTags,
 } from '@nestjs/swagger';
 import { CarService } from './car.service';
@@ -79,6 +81,11 @@ export class CarController {
   }
 
   @Patch(':licensePlate')
+  @ApiParam({
+    name: 'licensePlate',
+    description: "Car's licensePlate.",
+    required: true,
+  })
   @HttpCode(HttpStatus.ACCEPTED)
   update(
     @Param() carParams: CarParamValiation,
@@ -88,6 +95,11 @@ export class CarController {
   }
 
   @Delete(':id')
+  @ApiParam({
+    name: 'id',
+    description: "Car's id.",
+    required: true,
+  })
   @HttpCode(HttpStatus.ACCEPTED)
   @ApiAcceptedResponse({
     isArray: false,

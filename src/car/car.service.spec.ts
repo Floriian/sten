@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Car } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
+import { CalculateService } from '../utils/calc.service';
 import { CarService } from './car.service';
 import { UpdateCarDto } from './dto/update-car.dto';
 
@@ -51,6 +52,7 @@ const db = {
 describe('CarService', () => {
   let service: CarService;
   let prisma: PrismaService;
+  let calculate: CalculateService;
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
@@ -59,6 +61,7 @@ describe('CarService', () => {
           provide: PrismaService,
           useValue: db,
         },
+        CalculateService,
       ],
     }).compile();
 
@@ -79,7 +82,7 @@ describe('CarService', () => {
     expect(service.findOne(testCar.licensePlate)).resolves.toEqual(oneCar);
   });
 
-  it('Should update an car', async () => {
+  it('Should update a car', async () => {
     const carDto: UpdateCarDto = {
       fuelType: testCar.fuel,
       licensePlate: testCar.licensePlate,
@@ -91,7 +94,7 @@ describe('CarService', () => {
     expect(car).toEqual(testCar);
   });
 
-  it('Should delete an car', async () => {
+  it('Should delete a car', async () => {
     const deleteCar = await service.remove(testCar.id);
     expect(deleteCar).toEqual(testCar);
   });

@@ -181,8 +181,8 @@ describe('Car E2e', () => {
         .expectBodyContains(createDto.manufacturer)
         .expectBodyContains(createDto.model)
         .expectBodyContains(createDto.year)
-        .stores('id', 'id')
-        .stores('licensePlate', 'licensePlate');
+        .stores('licensePlate', 'licensePlate')
+        .stores('id', 'id');
     });
     it('Should get a list of cars.', () => {
       return pactum
@@ -196,7 +196,23 @@ describe('Car E2e', () => {
         .spec()
         .patch('/{licensePlate}')
         .withPathParams('licensePlate', '$S{licensePlate}')
+        .withBody(updateDto)
         .expectStatus(HttpStatus.ACCEPTED);
+    });
+    it('Should delete a car', () => {
+      return pactum
+        .spec()
+        .delete('/{id}')
+        .withPathParams('id', '$S{id}')
+        .expectStatus(HttpStatus.ACCEPTED);
+    });
+    it('Should be a BAD_REQUEST on delete car', () => {
+      //this test needed, because DELETE method only accept number. It validates the given param.
+      return pactum
+        .spec()
+        .delete('/{licensePlate}')
+        .withPathParams('licensePlate', '$S{licensePlate}')
+        .expectStatus(HttpStatus.BAD_REQUEST);
     });
   });
 });

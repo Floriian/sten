@@ -16,10 +16,12 @@ import {
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
+  ApiParam,
   ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
 import { CityService } from './city.service';
+import { CityParamDto } from './dto/city-param.dto';
 import { CityQueryDto } from './dto/city-query.dto';
 import { CreateCityDto } from './dto/create-city.dto';
 import { UpdateCityDto } from './dto/update-city.dto';
@@ -64,9 +66,15 @@ export class CityController {
   }
 
   @Get(':name')
+  @ApiParam({
+    name: 'name',
+    description: "City's name",
+  })
   @HttpCode(HttpStatus.OK)
   @ApiQuery({
     name: 'includeWeather',
+    description: 'Include weather?',
+    required: false,
   })
   @ApiOkResponse({
     isArray: false,
@@ -79,11 +87,16 @@ export class CityController {
     description: 'No city found.',
     status: HttpStatus.NOT_FOUND,
   })
-  findOne(@Param('name') name: string, @Query() query: CityQueryDto) {
-    return this.cityService.findOne(name, query);
+  findOne(@Param() cityParams: CityParamDto, @Query() query: CityQueryDto) {
+    return this.cityService.findOne(cityParams.name, query);
   }
 
   @Patch(':id')
+  @ApiParam({
+    name: 'id',
+    description: "City's ID's",
+    required: true,
+  })
   @HttpCode(HttpStatus.ACCEPTED)
   @ApiAcceptedResponse({
     isArray: false,
@@ -96,11 +109,19 @@ export class CityController {
     description: 'No city find with given id.',
     status: HttpStatus.NOT_FOUND,
   })
-  update(@Param('id') id: string, @Body() updateCityDto: UpdateCityDto) {
-    return this.cityService.update(+id, updateCityDto);
+  update(
+    @Param() cityParams: CityParamDto,
+    @Body() updateCityDto: UpdateCityDto,
+  ) {
+    return this.cityService.update(+cityParams.id, updateCityDto);
   }
 
   @Delete(':name')
+  @ApiParam({
+    name: 'name',
+    description: "City's name",
+    required: true,
+  })
   @HttpCode(HttpStatus.ACCEPTED)
   @ApiAcceptedResponse({
     isArray: false,
@@ -113,7 +134,7 @@ export class CityController {
     description: 'No city found with given id',
     status: HttpStatus.NOT_FOUND,
   })
-  remove(@Param('name') name: string) {
-    return this.cityService.remove(name);
+  remove(@Param() cityParams: CityParamDto) {
+    return this.cityService.remove(cityParams.name);
   }
 }

@@ -97,10 +97,10 @@ GET /animal
 
 It returns all animals in the db. <br>
 
-|    Option    |  Value   |
-| :----------: | :------: |
-|    Params    |   None   |
-| Request body | Required |
+|    Option    | Value |
+| :----------: | :---: |
+|    Params    | None  |
+| Request body | Empty |
 
 Example responses
 
@@ -215,7 +215,7 @@ It will update animal by id, and returns the animal with updated data.
 |    Option    |  Value   |
 | :----------: | :------: |
 |    Params    | Required |
-| Request body | Required |
+| Request body | Optional |
 
 Request body options:
 
@@ -249,7 +249,7 @@ Example responses
   ```
 
 - Response (Code 404): <br>No animal found with this ID.
-- Response (Code 400): <br>This response happens, when the body is failed the validation test.
+- Response (Code 400): <br>This response happens, when the body/param is failed the validation test.
 
 ### <a name="animals.delete"></a>DELETE
 
@@ -290,7 +290,7 @@ Example responses
 
 ### <a name="cars.get"></a>GET
 
-#### <a name="cars.getbyid"></a>Get By ID
+#### <a name="cars.getbylicenseplate"></a>Get By Licenseplate
 
 ### <a name="cars.post"></a>POST
 

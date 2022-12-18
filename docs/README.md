@@ -1,5 +1,3 @@
-# <p align="center">STEN</p>
-
 # Basic concept
 
 The app name is anagram of Nest.
@@ -287,3 +285,15 @@ Example responses
   No animal fond with the given ID.
 - Response (Code 400) <br>
   This response happens, when the param not int, It will return a body
+
+## <a name="cars"></a>Cars
+
+### <a name="cars.get"></a>GET
+
+#### <a name="cars.getbyid"></a>Get By ID
+
+### <a name="cars.post"></a>POST
+
+### <a name="cars.patch"></a>PATCH
+
+### <a name="cars.delete"></a>DELETE

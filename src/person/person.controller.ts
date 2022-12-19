@@ -40,7 +40,7 @@ export class PersonController {
   })
   @ApiConflictResponse({
     isArray: false,
-    description: 'Returns a ConflictException',
+    description: 'This name is reserved.',
     status: HttpStatus.CONFLICT,
   })
   create(@Body() createPersonDto: CreatePersonDto) {
@@ -57,7 +57,7 @@ export class PersonController {
   })
   @ApiNotFoundResponse({
     isArray: false,
-    description: 'Returns a NotFoundException',
+    description: 'No persons found in the database.',
     status: HttpStatus.NOT_FOUND,
   })
   findAll() {
@@ -97,7 +97,7 @@ export class PersonController {
   })
   @ApiOkResponse({
     isArray: false,
-    description: 'It returns a NotFoundException',
+    description: 'No person found with this name.',
     status: HttpStatus.NOT_FOUND,
   })
   findOne(@Param('name') name: string, @Query() query: PersonQueryDto) {
@@ -114,7 +114,7 @@ export class PersonController {
   })
   @ApiNotFoundResponse({
     isArray: false,
-    description: 'It returns a NotFoundException',
+    description: 'No person found with the given id.',
     status: HttpStatus.NOT_FOUND,
   })
   update(@Param('id') id: string, @Body() updatePersonDto: UpdatePersonDto) {
@@ -132,7 +132,7 @@ export class PersonController {
   })
   @ApiNotFoundResponse({
     isArray: false,
-    description: 'It returns a NotFoundException',
+    description: 'No person found with the given id.',
     status: HttpStatus.NOT_FOUND,
   })
   remove(@Param('id') id: string) {

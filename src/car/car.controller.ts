@@ -12,10 +12,10 @@ import {
 import {
   ApiAcceptedResponse,
   ApiConflictResponse,
+  ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiParam,
-  ApiProperty,
   ApiTags,
 } from '@nestjs/swagger';
 import { CarService } from './car.service';
@@ -31,7 +31,7 @@ export class CarController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  @ApiAcceptedResponse({
+  @ApiCreatedResponse({
     isArray: false,
     description: 'It creates an car.',
     status: HttpStatus.CREATED,
@@ -39,7 +39,7 @@ export class CarController {
   })
   @ApiConflictResponse({
     isArray: false,
-    description: 'It returns a ConflictException',
+    description: 'This licenseplate is reserved',
     status: HttpStatus.CONFLICT,
   })
   create(@Body() createCarDto: CreateCarDto) {
@@ -56,7 +56,7 @@ export class CarController {
   })
   @ApiNotFoundResponse({
     isArray: false,
-    description: 'It returns a NotFoundException',
+    description: 'No car found with the given licenseplate.',
     status: HttpStatus.NOT_FOUND,
   })
   findAll() {
@@ -73,7 +73,7 @@ export class CarController {
   })
   @ApiNotFoundResponse({
     isArray: false,
-    description: 'It returns a NotFoundException',
+    description: 'No car found with the given licenseplate.',
     status: HttpStatus.NOT_FOUND,
   })
   findOne(@Param() carParams: CarParamValiation) {
@@ -87,6 +87,17 @@ export class CarController {
     required: true,
   })
   @HttpCode(HttpStatus.ACCEPTED)
+  @ApiAcceptedResponse({
+    description: 'It updates a car.',
+    type: CarEntity,
+    isArray: false,
+    status: HttpStatus.ACCEPTED,
+  })
+  @ApiNotFoundResponse({
+    description: 'No car found with the given licenseplate.',
+    isArray: false,
+    status: HttpStatus.NOT_FOUND,
+  })
   update(
     @Param() carParams: CarParamValiation,
     @Body() updateCarDto: UpdateCarDto,
@@ -110,7 +121,7 @@ export class CarController {
   })
   @ApiNotFoundResponse({
     isArray: false,
-    description: 'It returns a NotFoundException',
+    description: 'No car found with the given licenseplate.',
     status: HttpStatus.NOT_FOUND,
   })
   remove(@Param() carParams: CarParamValiation) {

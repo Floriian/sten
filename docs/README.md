@@ -1,7 +1,7 @@
 # Basic concept
 
 The app name is anagram of Nest.
-The basic concept is create a free API for learning purposes. In my school we learn Python, and this created specially for my school. But I think, it's very useful for other schools for teaching how RESTAPI-s works, or everyone else :) It uses <a href="https://nestjs.com">NestJS</a> under the hood. Supports basic HTTP methods (GET, POST, PATCH, DELETE). I will add Put method in the future.
+The basic concept is create a free API for learning purposes. In my school we learn Python, and this created specially for my school. But I think, it's very useful for other schools for teaching how RESTAPI-s works, or everyone else :) It uses <a href="https://nestjs.com">NestJS</a> under the hood. Supports basic HTTP methods (GET, POST, PATCH, DELETE). I will add Put method in the future. The database uses one-to-one relationships, except animals. Animals are seperated.
 
 # How can I install locally?
 

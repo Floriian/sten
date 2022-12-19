@@ -8,6 +8,7 @@ import { WeatherModule } from './weather/weather.module';
 import { UtilsModule } from './utils/utils.module';
 import { PersonModule } from './person/person.module';
 import { TodosModule } from './todos/todos.module';
+import { LoggerModule } from './logger/logger.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { TodosModule } from './todos/todos.module';
     UtilsModule,
     PersonModule,
     TodosModule,
+    LoggerModule,
   ],
 })
 export class AppModule {}

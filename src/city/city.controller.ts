@@ -42,7 +42,7 @@ export class CityController {
   })
   @ApiConflictResponse({
     isArray: false,
-    description: 'It returns a ConflictException',
+    description: 'This city is exists in the database.',
   })
   create(@Body() createCityDto: CreateCityDto) {
     return this.cityService.create(createCityDto);
@@ -84,7 +84,7 @@ export class CityController {
   })
   @ApiNotFoundResponse({
     isArray: false,
-    description: 'No city found.',
+    description: 'No city find with the given id.',
     status: HttpStatus.NOT_FOUND,
   })
   findOne(@Param() cityParams: CityParamDto, @Query() query: CityQueryDto) {
@@ -106,7 +106,7 @@ export class CityController {
   })
   @ApiNotFoundResponse({
     isArray: false,
-    description: 'No city find with given id.',
+    description: 'No city find with the given id.',
     status: HttpStatus.NOT_FOUND,
   })
   update(
@@ -131,7 +131,7 @@ export class CityController {
   })
   @ApiNotFoundResponse({
     isArray: false,
-    description: 'No city found with given id',
+    description: 'No city found with the given id',
     status: HttpStatus.NOT_FOUND,
   })
   remove(@Param() cityParams: CityParamDto) {

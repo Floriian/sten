@@ -22,6 +22,7 @@ async function bootstrap() {
     .setTitle('STEN')
     .setDescription('A simple API.')
     .setVersion('1.0')
+    .setExternalDoc('External doc', 'https://floriian.github.io/sten')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/api', app, document);

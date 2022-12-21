@@ -121,24 +121,36 @@ describe('City E2E', () => {
         .expectBodyContains(createDto.name)
         .expectStatus(HttpStatus.OK);
     });
-    //TODO
-    //!manually test works, but automated no....
-    // it('Should return a city, without weather', () => {
-    //   return pactum
-    //     .spec()
-    //     .get('/{name}')
-    //     .withPathParams('name', '$S{name}')
-    //     .withQueryParams('includeWeather', 'false')
-    //     .expectStatus(HttpStatus.OK);
-    // });
-    // it('Should return a city with weather', () => {
-    //   return pactum
-    //     .spec()
-    //     .get('/{name}')
-    //     .withPathParams('name', '$S{name}')
-    //     .withQueryParams('includeWeather', 'true')
-    //     .expectStatus(HttpStatus.OK);
-    // });
+    it('Should return a city, without weather', () => {
+      setTimeout(() => {
+        return pactum
+          .spec()
+          .get('/{name}')
+          .withPathParams('name', '$S{name}')
+          .withQueryParams('includeWeather', 'false')
+          .expectBody({
+            id: 0,
+            city: '$S{name}',
+            county: 'Bács-Kiskun',
+          })
+          .expectStatus(HttpStatus.OK);
+      }, 500);
+    });
+    it('Should return a city with weather', () => {
+      setTimeout(() => {
+        return pactum
+          .spec()
+          .get('/{name}')
+          .withPathParams('name', '$S{name}')
+          .withQueryParams('includeWeather', 'true')
+          .expectBody({
+            id: 0,
+            city: '$S{name}',
+            county: 'Bács-Kiskun',
+          })
+          .expectStatus(HttpStatus.OK);
+      }, 500);
+    });
     it('Should return cities', () => {
       return pactum
         .spec()
@@ -163,7 +175,7 @@ describe('City E2E', () => {
         .withPathParams('name', '$S{name}')
         .expectStatus(HttpStatus.ACCEPTED);
     });
-    it("Shouldn' t update a city. (BadRequest)", () => {
+    it("Shouldn't update a city. (BadRequest)", () => {
       return pactum
         .spec()
         .patch('/{name}')

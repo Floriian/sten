@@ -19,7 +19,7 @@ export class TodosService {
 
   async findAll(): Promise<Todo[]> {
     const todos = await this.prisma.todo.findMany({});
-    if (!todos) throw new NotFoundException();
+    if (!todos.length) throw new NotFoundException();
     return todos;
   }
 

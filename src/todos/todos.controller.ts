@@ -15,6 +15,7 @@ import { UpdateTodoDto } from './dto/update-todo.dto';
 import {
   ApiAcceptedResponse,
   ApiBadRequestResponse,
+  ApiBody,
   ApiCreatedResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
@@ -76,7 +77,6 @@ export class TodosController {
     isArray: false,
     status: HttpStatus.NOT_FOUND,
   })
-  //TODO param validation
   @ApiBadRequestResponse({
     description: 'Invalid param.',
     status: HttpStatus.BAD_REQUEST,
@@ -88,6 +88,16 @@ export class TodosController {
 
   @Patch(':id')
   @HttpCode(HttpStatus.ACCEPTED)
+  @ApiBody({
+    isArray: false,
+    schema: {
+      example: {
+        title: 'string',
+        body: 'string',
+        completed: true,
+      },
+    },
+  })
   @ApiAcceptedResponse({
     description: 'It updates a TODO',
     type: TodoEntity,

@@ -22,6 +22,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { TodoEntity } from './entities/todo.entity';
+import { TodoParamValidation } from './dto/todo-param.dto';
 
 @ApiTags('Todo')
 @Controller('todos')
@@ -64,12 +65,6 @@ export class TodosController {
 
   @Get(':id')
   @HttpCode(HttpStatus.OK)
-  @ApiParam({
-    name: 'id',
-    description: "TODO's id.",
-    required: true,
-    type: Number,
-  })
   @ApiOkResponse({
     description: 'It returns one TODO.',
     type: TodoEntity,
@@ -87,8 +82,8 @@ export class TodosController {
     status: HttpStatus.BAD_REQUEST,
     isArray: false,
   })
-  findOne(@Param('id') id: string) {
-    return this.todosService.findOne(+id);
+  findOne(@Param() todoParam: TodoParamValidation) {
+    return this.todosService.findOne(+todoParam.id);
   }
 
   @Patch(':id')
@@ -109,8 +104,11 @@ export class TodosController {
     status: HttpStatus.BAD_REQUEST,
     isArray: false,
   })
-  update(@Param('id') id: string, @Body() updateTodoDto: UpdateTodoDto) {
-    return this.todosService.update(+id, updateTodoDto);
+  update(
+    @Param() todoParam: TodoParamValidation,
+    @Body() updateTodoDto: UpdateTodoDto,
+  ) {
+    return this.todosService.update(+todoParam.id, updateTodoDto);
   }
 
   @Delete(':id')
@@ -131,7 +129,7 @@ export class TodosController {
     status: HttpStatus.BAD_REQUEST,
     isArray: false,
   })
-  remove(@Param('id') id: string) {
-    return this.todosService.remove(+id);
+  remove(@Param() todoParam: TodoParamValidation) {
+    return this.todosService.remove(+todoParam.id);
   }
 }

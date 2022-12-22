@@ -412,6 +412,7 @@ Example responses:
 - Response (Code 201)
   ```json
   {
+    "id": 3,
     "manufacturer": "AUDI",
     "model": "RS6",
     "year": 2010,
@@ -698,7 +699,7 @@ Example responses:
 DELETE /city/:name
 ```
 
-It will delete a car from the database.
+It will delete a city from the database. Includes city weather.
 
 |    Option    |  Value   |
 | :----------: | :------: |

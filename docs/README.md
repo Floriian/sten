@@ -386,12 +386,12 @@ Request body options:
 | licensePlate |            string            |    ✅     |
 |     fuel     | string (see options below\*) |    ✅     |
 
-**\*Fuel options**:
-
-- DIESEL
-- PETROL
-- ELECTRIC
-- HYBRID
+| Fuel Options \* |
+| :-------------- |
+| DIESEL          |
+| PETROL          |
+| ELECTRIC        |
+| HYBRID          |
 
 Example:
 
@@ -447,12 +447,12 @@ This action updates a car by licenseplate.
 |     year     |             int              |    ❌     |
 |     fuel     | string (see options below\*) |    ❌     |
 
-**\*Fuel options**:
-
-- DIESEL
-- PETROL
-- ELECTRIC
-- HYBRID
+| Fuel Options \* |
+| :-------------- |
+| DIESEL          |
+| PETROL          |
+| ELECTRIC        |
+| HYBRID          |
 
 Example:
 

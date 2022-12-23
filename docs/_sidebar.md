@@ -4,7 +4,7 @@
 		- [With Docker-Compose](README.md#with-docker-compose)
 		- [Without Docker-Compose](README.md#without-docker-compose)
 - Endpoints
-	- [/animal](animals.md#animals-main)
-	- [/car](car.md#car-main)
-	- [/city](city.md#city-main)
-	- [/person](person.md#person-main)
+	- [/animal](Animals.md#animals-main)
+	- [/car](Car.md#car-main)
+	- [/city](City.md#city-main)
+	- [/person](Person.md#person-main)

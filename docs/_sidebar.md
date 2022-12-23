@@ -1,0 +1,10 @@
+- Getting Started
+	- [Basic concept](README.md#basic-concept)
+	- [How can I install locally?](README.md#install-locally)
+		- [With Docker-Compose](README.md#with-docker-compose)
+		- [Without Docker-Compose](README.md#without-docker-compose)
+- Endpoints
+	- [/animal](animals.md#animals-main)
+	- [/car](car.md#car-main)
+	- [/city](city.md#city-main)
+	- [/person](person.md#person-main)

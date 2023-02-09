@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Todo } from '@prisma/client';
+import { OmitStudentId } from '../../types/OmitStudentId';
 
-export class TodoEntity implements Todo {
+export class TodoEntity implements OmitStudentId<Todo> {
   @ApiProperty()
   id: number;
 

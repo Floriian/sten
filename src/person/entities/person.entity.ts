@@ -1,7 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Person } from '@prisma/client';
+import { OmitStudentId } from '../../types/OmitStudentId';
 
-export class PersonEntity implements Person {
+export class PersonEntity implements OmitStudentId<Person> {
   @ApiProperty()
   id: number;
 

@@ -24,6 +24,8 @@ model Animal {
   specie String
   age    Int
 
+  student Student[]
+
   @@map("animals")
 }
 
@@ -35,6 +37,7 @@ model City {
 
   weather Weather[]
   person  Person[]
+  student Student[]
 
   @@map("cities")
 }
@@ -45,8 +48,10 @@ model Weather {
   temp     Float
   humidity Float
 
-  city   City @relation(fields: [cityId], references: [id], onDelete: Cascade)
-  cityId Int
+  city      City     @relation(fields: [cityId], references: [id], onDelete: Cascade)
+  cityId    Int
+  Student   Student? @relation(fields: [studentId], references: [id])
+  studentId Int?
 
   @@map("weathers")
 }
@@ -63,7 +68,9 @@ model Car {
 
   fuel FuelType
 
-  person Person[]
+  person    Person[]
+  Student   Student? @relation(fields: [studentId], references: [id])
+  studentId Int?
 
   @@map("cars")
 }
@@ -78,7 +85,9 @@ model Todo {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  person Person[]
+  person    Person[]
+  Student   Student? @relation(fields: [studentId], references: [id])
+  studentId Int?
 }
 
 model Person {
@@ -94,8 +103,52 @@ model Person {
   city   City? @relation(fields: [cityId], references: [id])
   cityId Int?
 
-  todo   Todo? @relation(fields: [todoId], references: [id])
-  todoId Int?
+  todo      Todo?    @relation(fields: [todoId], references: [id])
+  todoId    Int?
+  Student   Student? @relation(fields: [studentId], references: [id])
+  studentId Int?
 
   @@map("persons")
+}
+
+model Class {
+  id        Int    @id @default(autoincrement())
+  classname String @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  students  Student[]
+  Teacher   Teacher?  @relation(fields: [teacherId], references: [id])
+  teacherId Int?
+
+  @@map("classes")
+}
+
+model Student {
+  id Int @id @default(autoincrement())
+
+  name String @unique
+
+  animals  Animal[]
+  cities   City[]
+  weathers Weather[]
+  cars     Car[]
+  todos    Todo[]
+  persons  Person[]
+
+  Class     Class?   @relation(fields: [classId], references: [id])
+  classId   Int?
+  Teacher   Teacher? @relation(fields: [teacherId], references: [id])
+  teacherId Int?
+}
+
+model Teacher {
+  id Int @id @default(autoincrement())
+
+  name     String @unique
+  password String
+
+  students Student[]
+  classes  Class[]
 }
